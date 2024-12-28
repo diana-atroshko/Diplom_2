@@ -11,7 +11,7 @@ class TestGetOrders:
 
     @allure.step("Тест получения заказов авторизованным пользователем")
     def test_get_orders_authorized_user(self, existing_user_fixture):
-        response = self.order_methods.get_orders(existing_user_fixture)  # Убедитесь, что передаете сам токен
+        response = self.order_methods.get_orders(existing_user_fixture)
         assert response.status_code == 200
         assert response.json().get("success") is True
         assert isinstance(response.json().get("orders"), list)
