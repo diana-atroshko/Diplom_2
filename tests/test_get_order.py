@@ -1,10 +1,6 @@
 import allure
-from data import EXISTED_PAYLOAD
-from methods.changing_user_data_methods import UserProfile
-from methods.create_user_methods import CreateUser
 from methods.get_order_methods import Order
 import pytest
-from methods.login_user_methods import LoginUser
 
 @allure.epic("Управление заказами")
 @allure.description("Тесты для получения заказов конкретного пользователя: авторизованный пользователь и неавторизованный пользователь.")

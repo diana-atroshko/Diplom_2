@@ -1,11 +1,7 @@
 import allure
-
-from data import ingredient1, ingredient2, EXISTED_PAYLOAD
-from methods.changing_user_data_methods import UserProfile
-from methods.create_user_methods import CreateUser
+from data import ingredient1, ingredient2
 import pytest
 from methods.creating_order_methods import CreatingOrder
-from methods.login_user_methods import LoginUser
 
 @allure.epic("Управление заказами")
 @allure.description("Тесты для создания заказов, с авторизацией и без и валидацию ингредиентов.")
