@@ -1,6 +1,5 @@
 import allure
 from data import ingredient1, ingredient2
-import pytest
 from methods.creating_order_methods import CreatingOrder
 
 @allure.epic("Управление заказами")

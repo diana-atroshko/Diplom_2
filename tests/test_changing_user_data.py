@@ -2,7 +2,6 @@ import allure
 from data import EXISTED_PAYLOAD
 from methods.changing_user_data_methods import UserProfile
 from methods.create_user_methods import CreateUser
-import pytest
 from methods.login_user_methods import LoginUser
 
 @allure.epic("Управление профилем пользователя")

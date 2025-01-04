@@ -1,6 +1,6 @@
 import allure
 from methods.get_order_methods import Order
-import pytest
+
 
 @allure.epic("Управление заказами")
 @allure.description("Тесты для получения заказов конкретного пользователя: авторизованный пользователь и неавторизованный пользователь.")

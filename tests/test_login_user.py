@@ -1,5 +1,4 @@
 from methods.login_user_methods import LoginUser
-import pytest
 import allure
 
 @allure.epic("Управление пользователями")
