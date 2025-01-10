@@ -1,5 +1,5 @@
 import allure
-from data import ingredient1, ingredient2
+from data import ingredient1, ingredient2, INGR_ID_ERROR_RESPONSE
 from methods.creating_order_methods import CreatingOrder
 
 @allure.epic("Управление заказами")
@@ -9,7 +9,7 @@ class TestCreateOrder:
     def setup_class(cls):
         cls.order_methods = CreatingOrder()
 
-    @allure.step("Тест создания заказа с авторизацией")
+    @allure.title("Тест создания заказа с авторизацией")
     def test_create_order_with_authorization(self,existing_user_fixture):
         ingredients = [ingredient1, ingredient2]
         response = self.order_methods.create_order(existing_user_fixture, ingredients)
@@ -18,7 +18,7 @@ class TestCreateOrder:
         assert "order" in response.json()
         assert "number" in response.json()["order"]
 
-    @allure.step("Тест создания заказа без авторизации")
+    @allure.title("Тест создания заказа без авторизации")
     def test_create_order_without_authorization(self):
         ingredients = [ingredient1, ingredient2]
         response = self.order_methods.create_order(None, ingredients)
@@ -27,13 +27,13 @@ class TestCreateOrder:
         assert "order" in response.json()
         assert "number" in response.json()["order"]
 
-    @allure.step("Тест создания заказа без ингредиентов")
+    @allure.title("Тест создания заказа без ингредиентов")
     def test_create_order_without_ingredients(self,existing_user_fixture):
         response = self.order_methods.create_order(existing_user_fixture, [])
         assert response.status_code == 400
-        assert response.json() == {"success": False, "message": "Ingredient ids must be provided"}
+        assert response.json() == INGR_ID_ERROR_RESPONSE
 
-    @allure.step("Тест создания заказа с неверным хешем ингредиентов")
+    @allure.title("Тест создания заказа с неверным хешем ингредиентов")
     def test_create_order_with_invalid_ingredient(self,existing_user_fixture):
         ingredients = ["invalid_hash_ingredient"]
         response = self.order_methods.create_order(existing_user_fixture, ingredients)

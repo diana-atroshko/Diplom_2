@@ -1,3 +1,4 @@
+from data import LOGIN_ERROR_RESPONSE
 from methods.login_user_methods import LoginUser
 import allure
 
@@ -7,33 +8,27 @@ class TestLoginUser:
     def setup_method(self):
         self.login_methods = LoginUser()
 
-    @allure.step("Тест авторизации существующего пользователя")
+    @allure.title("Тест авторизации существующего пользователя")
     def test_login_existing_user(self):
         response = self.login_methods.login_user()
         assert response.status_code == 200
         assert response.json().get("success") is True
         assert response.json().get("accessToken") is not None
 
-    @allure.step("Тест авторизации с некорректными учетными данными")
+    @allure.title("Тест авторизации с некорректными учетными данными")
     def test_login_with_incorrect_credentials(self):
         payload = {
             "email": "wrong-email@yandex.ru",
             "password": "wrongpassword"}
         response = self.login_methods.login_user(payload)
         assert response.status_code == 401
-        assert response.json() == {
-            "success": False,
-            "message": "email or password are incorrect"
-        }
+        assert response.json() == LOGIN_ERROR_RESPONSE
 
-    @allure.step("Тест авторизации с отсутствующим полем")
+    @allure.title("Тест авторизации с отсутствующим полем")
     def test_login_missing_field(self):
         payload = {
             "email": "",
             "password": "somepassword"}
         response = self.login_methods.login_user(payload)
         assert response.status_code == 401
-        assert response.json() == {
-            "success": False,
-            "message": "email or password are incorrect"
-        }
+        assert response.json() == LOGIN_ERROR_RESPONSE

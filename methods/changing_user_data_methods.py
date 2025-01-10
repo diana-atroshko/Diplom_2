@@ -1,13 +1,13 @@
 import allure
 import requests
-from data import CHANGING_USER_DATA_URL
+from data import Url
 
 
 class UserProfile:
     @allure.step("Получение информации о пользователе")
     def get_user_info(self, token):
         headers = {"Authorization": token}
-        return requests.get(CHANGING_USER_DATA_URL, headers=headers)
+        return requests.get(Url.CHANGING_USER_DATA_URL, headers=headers)
 
     @allure.step("Обновление информации о пользователе")
     def update_user_info(self, token, email=None, name=None):
@@ -17,5 +17,5 @@ class UserProfile:
             payload["email"] = email
         if name:
             payload["name"] = name
-        return requests.patch(CHANGING_USER_DATA_URL, json=payload, headers=headers)
+        return requests.patch(Url.CHANGING_USER_DATA_URL, json=payload, headers=headers)
     

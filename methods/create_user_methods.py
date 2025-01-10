@@ -2,7 +2,7 @@ import string
 import random
 import requests
 import allure
-from data import CREATE_USER_URL
+from data import Url
 
 
 class CreateUser:
@@ -30,5 +30,5 @@ class CreateUser:
         if payload is None:
             payload = self.generate_user_data()
 
-        response = requests.post(CREATE_USER_URL, json=payload)
+        response = requests.post(Url.CREATE_USER_URL, json=payload)
         return response

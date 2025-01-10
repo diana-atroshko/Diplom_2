@@ -1,4 +1,6 @@
 import allure
+
+from data import AUTH_ERROR_RESPONSE
 from methods.get_order_methods import Order
 
 
@@ -9,18 +11,15 @@ class TestGetOrders:
         self.order_methods = Order()
         self.token = existing_user_fixture
 
-    @allure.step("Тест получения заказов авторизованным пользователем")
+    @allure.title("Тест получения заказов авторизованным пользователем")
     def test_get_orders_authorized_user(self, existing_user_fixture):
         response = self.order_methods.get_orders(existing_user_fixture)
         assert response.status_code == 200
         assert response.json().get("success") is True
         assert isinstance(response.json().get("orders"), list)
 
-    @allure.step("Тест получения заказов неавторизованным пользователем")
+    @allure.title("Тест получения заказов неавторизованным пользователем")
     def test_get_orders_unauthorized_user(self):
         response = self.order_methods.get_orders("")
         assert response.status_code == 401
-        assert response.json() == {
-            "success": False,
-            "message": "You should be authorised"
-        }
+        assert response.json() == AUTH_ERROR_RESPONSE
